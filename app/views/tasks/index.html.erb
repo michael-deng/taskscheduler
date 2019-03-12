@@ -1,0 +1,19 @@
+<h1>Tasks</h1>
+
+<%= link_to 'Schedule', schedule_path %>
+
+<% @tasks.each do |task| %>
+    <hr>
+    <h3><%= link_to task.name, task_path(task) %></h3>
+    <p><%= link_to 'Edit', edit_task_path(task) %></p>
+    <p>Duration (days): <%= task.duration %></p>
+    <% if @task_dependencies[task].length > 0 %>
+        Depends on: 
+        <% @task_dependencies[task].each do |task| %>
+            <%= task.name %>
+        <% end %>
+    <% end %>
+<% end %>
+
+<%= link_to 'New task', new_task_path %>
+<%= link_to 'All dependencies', dependencies_path %>

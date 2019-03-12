@@ -1,0 +1,8 @@
+<h1><%= @task.name %></h1>
+<p>Duration (days): <%= @task.duration %></p>
+
+<%= link_to 'Edit', edit_task_path(@task) %>
+<%= link_to 'Destroy', task_path(@task),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Back', tasks_path %>

@@ -1,0 +1,37 @@
+<h1>Edit dependency</h1>
+
+<%= form_with model: @dependency, local: true do |form| %>
+ 
+  <% if @dependency.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@dependency.errors.count, "error") %> prohibited
+        this dependency from being saved:
+      </h2>
+      <ul>
+        <% @dependency.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :child %><br>
+    <%= form.collection_select(:child, Task.all, :id, :name) %>
+  </p>
+
+  depends on:
+ 
+  <p>
+    <%= form.label :parent %><br>
+    <%= form.collection_select(:parent, Task.all, :id, :name) %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+ 
+<% end %>
+
+<%= link_to 'Back', dependencies_path %>

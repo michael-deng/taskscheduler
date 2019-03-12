@@ -1,0 +1,33 @@
+<h1>Schedule</h1>
+
+Total duration (weeks): <%= @total_duration_weeks %>
+<br><br>
+<div id="schedule"></div>
+<br>
+<%= link_to 'Back', tasks_path %>
+
+<script>
+    var schedule = document.getElementById("schedule");
+    var visited = <%= @visited.to_json.html_safe %>;
+    console.log(visited);
+
+    for (i = 1; i <= <%= @total_duration_weeks %> && visited.length > 0; i++) {
+        var week = document.createElement("div");
+        var text = document.createTextNode(`Week ${i}`);
+        week.appendChild(text);
+
+        for (j = 1; j <= 5 && visited.length > 0; j++) {
+            var day = document.createElement("div");
+            var text = document.createTextNode(`Day ${j} ${visited[0].name}`);
+            day.appendChild(text);
+            week.appendChild(day);
+
+            if (--visited[0].duration == 0) {
+                visited.shift();
+            }
+        }
+        schedule.appendChild(week);
+        schedule.appendChild(document.createElement("hr"));
+    }
+
+</script>

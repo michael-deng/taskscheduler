@@ -1,0 +1,13 @@
+<h1>Dependencies</h1>
+
+<% @dependencies.each do |dependency| %>
+    <p><%= Task.find(dependency.child).name %> depends on <%= Task.find(dependency.parent).name %>
+        <%= link_to 'Edit', edit_dependency_path(dependency) %>
+        <%= link_to 'Destroy', dependency_path(dependency),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+    </p>
+<% end %>
+
+<%= link_to 'New dependency', new_dependency_path %>
+<%= link_to 'Back', tasks_path %>
